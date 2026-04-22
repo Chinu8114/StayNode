@@ -1,0 +1,31 @@
+server:
+  port: ${SERVER_PORT:5000}
+
+spring:
+  application:
+    name: staynode-backend
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:staynode}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: ${DB_USER:staynode}
+    password: ${DB_PASSWORD:staynode_pass}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    open-in-view: false
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-me-to-a-very-long-random-secret-string-at-least-256-bits-long}
+    expiration-ms: 604800000
+  cors:
+    allowed-origins: ${CORS_ORIGINS:*}
+
+logging:
+  level:
+    org.springframework.security: INFO
+    com.staynode: DEBUG
